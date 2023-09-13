@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="lab_2_c.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LaptopFix.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
