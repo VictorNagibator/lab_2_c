@@ -1,11 +1,11 @@
-#pragma once
+п»ї#pragma once
 #define LEN 30
-#define MAXCPUFREQ 9.0 //условная максимально возможная частота разгона CPU
+#define MAXCPUFREQ 9.0 //СѓСЃР»РѕРІРЅР°СЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕ РІРѕР·РјРѕР¶РЅР°СЏ С‡Р°СЃС‚РѕС‚Р° СЂР°Р·РіРѕРЅР° CPU
 #include <malloc.h>
 #include <string.h>
 #include <stdlib.h>
 
-//в состав cpu входят name - название процессора, frequency - его тактовая частота и num_of_cores - количество ядер
+//РІ СЃРѕСЃС‚Р°РІ cpu РІС…РѕРґСЏС‚ name - РЅР°Р·РІР°РЅРёРµ РїСЂРѕС†РµСЃСЃРѕСЂР°, frequency - РµРіРѕ С‚Р°РєС‚РѕРІР°СЏ С‡Р°СЃС‚РѕС‚Р° Рё num_of_cores - РєРѕР»РёС‡РµСЃС‚РІРѕ СЏРґРµСЂ
 typedef struct CPU
 {
 	char *name;
@@ -13,7 +13,7 @@ typedef struct CPU
 	int numOfCores;
 };
 
-//в состав gpu входят name - название видеокарты, frequency - тактовая частота ее видеоядра и vram - объем видеопамяти
+//РІ СЃРѕСЃС‚Р°РІ gpu РІС…РѕРґСЏС‚ name - РЅР°Р·РІР°РЅРёРµ РІРёРґРµРѕРєР°СЂС‚С‹, frequency - С‚Р°РєС‚РѕРІР°СЏ С‡Р°СЃС‚РѕС‚Р° РµРµ РІРёРґРµРѕСЏРґСЂР° Рё vram - РѕР±СЉРµРј РІРёРґРµРѕРїР°РјСЏС‚Рё
 typedef struct GPU
 {
 	char *name;
@@ -21,10 +21,10 @@ typedef struct GPU
 	int vram;
 };
 
-//перечисление с типами оперативной памяти
+//РїРµСЂРµС‡РёСЃР»РµРЅРёРµ СЃ С‚РёРїР°РјРё РѕРїРµСЂР°С‚РёРІРЅРѕР№ РїР°РјСЏС‚Рё
 typedef enum RAMTypes { DDR, DDR2, DDR3, DDR4, DDR5 };
 
-//в состав ram входят name - название модели, type - тип памяти, frequency - тактовая частота, capacity - объем оперативной памяти, 
+//РІ СЃРѕСЃС‚Р°РІ ram РІС…РѕРґСЏС‚ name - РЅР°Р·РІР°РЅРёРµ РјРѕРґРµР»Рё, type - С‚РёРї РїР°РјСЏС‚Рё, frequency - С‚Р°РєС‚РѕРІР°СЏ С‡Р°СЃС‚РѕС‚Р°, capacity - РѕР±СЉРµРј РѕРїРµСЂР°С‚РёРІРЅРѕР№ РїР°РјСЏС‚Рё, 
 typedef struct RAM
 {
 	char* name;
@@ -33,19 +33,19 @@ typedef struct RAM
 	int capacity;
 };
 
-//в состав motherboard входят name - название материнской платы, socket - сокет, chipset - чипсет
+//РІ СЃРѕСЃС‚Р°РІ motherboard РІС…РѕРґСЏС‚ name - РЅР°Р·РІР°РЅРёРµ РјР°С‚РµСЂРёРЅСЃРєРѕР№ РїР»Р°С‚С‹, socket - СЃРѕРєРµС‚, chipset - С‡РёРїСЃРµС‚
 typedef struct Motherboard
 {
 	char *name, *socket, *chipset;
 };
 
-//в состав display входят width - количество пиксклей по горизонтали, height - по вертикали, refresh_rate - частота
+//РІ СЃРѕСЃС‚Р°РІ display РІС…РѕРґСЏС‚ width - РєРѕР»РёС‡РµСЃС‚РІРѕ РїРёРєСЃРєР»РµР№ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё, height - РїРѕ РІРµСЂС‚РёРєР°Р»Рё, refresh_rate - С‡Р°СЃС‚РѕС‚Р°
 typedef struct Display
 {
 	int width, height, refreshRate;
 };
 
-//структура "ноутбук", в которую входят cpu - процессор, gpu - видеокарта, ram - оперативная память, motherboard - материнская плата, display - экран и name - название модели ноутбука
+//СЃС‚СЂСѓРєС‚СѓСЂР° "РЅРѕСѓС‚Р±СѓРє", РІ РєРѕС‚РѕСЂСѓСЋ РІС…РѕРґСЏС‚ cpu - РїСЂРѕС†РµСЃСЃРѕСЂ, gpu - РІРёРґРµРѕРєР°СЂС‚Р°, ram - РѕРїРµСЂР°С‚РёРІРЅР°СЏ РїР°РјСЏС‚СЊ, motherboard - РјР°С‚РµСЂРёРЅСЃРєР°СЏ РїР»Р°С‚Р°, display - СЌРєСЂР°РЅ Рё name - РЅР°Р·РІР°РЅРёРµ РјРѕРґРµР»Рё РЅРѕСѓС‚Р±СѓРєР°
 typedef struct Laptop
 {
 	CPU cpu;
@@ -56,10 +56,10 @@ typedef struct Laptop
 	char* name;
 };
 
-//перечисление со статусами заказа
+//РїРµСЂРµС‡РёСЃР»РµРЅРёРµ СЃРѕ СЃС‚Р°С‚СѓСЃР°РјРё Р·Р°РєР°Р·Р°
 typedef enum StatusTypes { ONHOLD, INPROCCESS, FINISHED };
 
-//самая основная структура "заказ", в которую входит num - номер заказа, laptop - ремонтируемый ноутбук, status - его состояние
+//СЃР°РјР°СЏ РѕСЃРЅРѕРІРЅР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР° "Р·Р°РєР°Р·", РІ РєРѕС‚РѕСЂСѓСЋ РІС…РѕРґРёС‚ num - РЅРѕРјРµСЂ Р·Р°РєР°Р·Р°, laptop - СЂРµРјРѕРЅС‚РёСЂСѓРµРјС‹Р№ РЅРѕСѓС‚Р±СѓРє, status - РµРіРѕ СЃРѕСЃС‚РѕСЏРЅРёРµ
 typedef struct Order
 {
 	int num;
@@ -67,9 +67,9 @@ typedef struct Order
 	StatusTypes status;
 };
 
-//вспомогательные функции
+//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
 
-//функция для перевода RAMTypes в строку
+//С„СѓРЅРєС†РёСЏ РґР»СЏ РїРµСЂРµРІРѕРґР° RAMTypes РІ СЃС‚СЂРѕРєСѓ
 char* RAMTypeToString(RAMTypes type) {
 	char* strType = (char*)calloc(LEN, sizeof(char));
 
@@ -96,20 +96,20 @@ char* RAMTypeToString(RAMTypes type) {
 	return strType;
 }
 
-//функция для перевода StatusTypes в строку
+//С„СѓРЅРєС†РёСЏ РґР»СЏ РїРµСЂРµРІРѕРґР° StatusTypes РІ СЃС‚СЂРѕРєСѓ
 char* StatusTypeToString(StatusTypes status) {
 	char* strStatus = (char*)calloc(LEN, sizeof(char));
 
 	switch (status)
 	{
 	case ONHOLD:
-		strcpy(strStatus, "в ожидании");
+		strcpy(strStatus, "РІ РѕР¶РёРґР°РЅРёРё");
 		break;
 	case INPROCCESS:
-		strcpy(strStatus, "в ремонте");
+		strcpy(strStatus, "РІ СЂРµРјРѕРЅС‚Рµ");
 		break;
 	case FINISHED:
-		strcpy(strStatus, "готов");
+		strcpy(strStatus, "РіРѕС‚РѕРІ");
 		break;
 	default:
 		break;
@@ -117,16 +117,16 @@ char* StatusTypeToString(StatusTypes status) {
 	return strStatus;
 }
 
-//основные функции
+//РѕСЃРЅРѕРІРЅС‹Рµ С„СѓРЅРєС†РёРё
 
-//функции по инициализация всех структур
+//С„СѓРЅРєС†РёРё РїРѕ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІСЃРµС… СЃС‚СЂСѓРєС‚СѓСЂ
 CPU CreateCPU(char *name, float frequency, int numOfCores) {
 	if (strlen(name) != 0 && frequency > 0 && numOfCores > 0) {
 		CPU cpu{ name, frequency, numOfCores };
 		return cpu;
 	} 
 	else {
-		printf("Неправильный формат данных! Выход из программы...");
+		printf("РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…! Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹...");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -137,7 +137,7 @@ GPU CreateGPU(char* name, float frequency, int vram) {
 		return gpu;
 	} 
 	else {
-		printf("Неправильный формат данных! Выход из программы...");
+		printf("РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…! Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹...");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -148,7 +148,7 @@ RAM CreateRAM(char* name, RAMTypes type, float frequency, int capacity) {
 		return ram;
 	} 
 	else {
-		printf("Неправильный формат данных! Выход из программы...");
+		printf("РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…! Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹...");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -159,7 +159,7 @@ Motherboard CreateMotherboard(char* name, char *socket, char *chipset) {
 		return motherboard;
 	} 
 	else {
-		printf("Неправильный формат данных! Выход из программы...");
+		printf("РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…! Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹...");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -170,7 +170,7 @@ Display CreateDisplay(int width, int height, int refreshRate) {
 		return display;
 	}
 	else {
-		printf("Неправильный формат данных! Выход из программы...");
+		printf("РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…! Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹...");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -181,7 +181,7 @@ Laptop CreateLaptop(CPU cpu, GPU gpu, RAM ram, Motherboard motherboard, Display 
 		return laptop;
 	}
 	else {
-		printf("Неправильный формат данных! Выход из программы...");
+		printf("РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…! Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹...");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -192,160 +192,160 @@ Order CreateOrder(int num, Laptop laptop, StatusTypes status) {
 		return order;
 	}
 	else {
-		printf("Неправильный формат данных! Выход из программы...");
+		printf("РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…! Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹...");
 		exit(EXIT_SUCCESS);
 	}
 }
 
-//функции по вводу структур
+//С„СѓРЅРєС†РёРё РїРѕ РІРІРѕРґСѓ СЃС‚СЂСѓРєС‚СѓСЂ
 CPU InputCPU() {
-	printf("\tВвод параметров процессора\n");
+	printf("\tР’РІРѕРґ РїР°СЂР°РјРµС‚СЂРѕРІ РїСЂРѕС†РµСЃСЃРѕСЂР°\n");
 
 	char* name = (char*)calloc(LEN, sizeof(char)); 
 	float frequency;
 	int numOfCores;
 
-	printf("Введите название процессора: ");
+	printf("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РїСЂРѕС†РµСЃСЃРѕСЂР°: ");
 	gets_s(name, LEN);
-	printf("Введите его тактовую частоту (в ГГц): ");
+	printf("Р’РІРµРґРёС‚Рµ РµРіРѕ С‚Р°РєС‚РѕРІСѓСЋ С‡Р°СЃС‚РѕС‚Сѓ (РІ Р“Р“С†): ");
 	scanf("%f", &frequency);
-	printf("Введите количество ядер: ");
+	printf("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЏРґРµСЂ: ");
 	scanf("%d", &numOfCores);
 	return CreateCPU(name, frequency, numOfCores);
 }
 
 GPU InputGPU() {
-	printf("\tВвод параметров видеокарты\n");
+	printf("\tР’РІРѕРґ РїР°СЂР°РјРµС‚СЂРѕРІ РІРёРґРµРѕРєР°СЂС‚С‹\n");
 
 	char* name = (char*)calloc(LEN, sizeof(char));
 	float frequency;
 	int vram;
 
-	printf("Введите название видеокарты: ");
+	printf("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РІРёРґРµРѕРєР°СЂС‚С‹: ");
 	gets_s(name, LEN);
-	printf("Введите тактовую частоту графического процессора (в МГц): ");
+	printf("Р’РІРµРґРёС‚Рµ С‚Р°РєС‚РѕРІСѓСЋ С‡Р°СЃС‚РѕС‚Сѓ РіСЂР°С„РёС‡РµСЃРєРѕРіРѕ РїСЂРѕС†РµСЃСЃРѕСЂР° (РІ РњР“С†): ");
 	scanf("%f", &frequency);
-	printf("Введите объем видеопамяти (в ГБ): ");
+	printf("Р’РІРµРґРёС‚Рµ РѕР±СЉРµРј РІРёРґРµРѕРїР°РјСЏС‚Рё (РІ Р“Р‘): ");
 	scanf("%d", &vram);
 	return CreateGPU(name, frequency, vram);
 }
 
 RAM InputRAM() {
-	printf("\tВвод параметров RAM\n");
+	printf("\tР’РІРѕРґ РїР°СЂР°РјРµС‚СЂРѕРІ RAM\n");
 
 	char* name = (char*)calloc(LEN, sizeof(char));
 	RAMTypes type;
 	float frequency;
 	int capacity;
 
-	printf("Введите название RAM: ");
+	printf("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ RAM: ");
 	gets_s(name, LEN);
-	printf("Введите тип памяти (DDR - 0, DDR2 - 1, DDR3 - 2, DDR4 - 3, DDR - 4): ");
+	printf("Р’РІРµРґРёС‚Рµ С‚РёРї РїР°РјСЏС‚Рё (DDR - 0, DDR2 - 1, DDR3 - 2, DDR4 - 3, DDR - 4): ");
 	scanf("%d", &type);
-	printf("Введите тактовую частоту (в МГц): ");
+	printf("Р’РІРµРґРёС‚Рµ С‚Р°РєС‚РѕРІСѓСЋ С‡Р°СЃС‚РѕС‚Сѓ (РІ РњР“С†): ");
 	scanf("%f", &frequency);
-	printf("Введите объем: ");
+	printf("Р’РІРµРґРёС‚Рµ РѕР±СЉРµРј: ");
 	scanf("%d", &capacity);
 	return CreateRAM(name, type, frequency, capacity);
 }
 
 Motherboard InputMotherboard() {
-	printf("\tВвод параметров материнской платы\n");
+	printf("\tР’РІРѕРґ РїР°СЂР°РјРµС‚СЂРѕРІ РјР°С‚РµСЂРёРЅСЃРєРѕР№ РїР»Р°С‚С‹\n");
 
 	char *name = (char*)calloc(LEN, sizeof(char)), 
 		*socket = (char*)calloc(LEN, sizeof(char)), 
 		*chipset = (char*)calloc(LEN, sizeof(char));
 
-	printf("Введите название материнской платы: ");
+	printf("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РјР°С‚РµСЂРёРЅСЃРєРѕР№ РїР»Р°С‚С‹: ");
 	gets_s(name, LEN);
-	printf("Введите сокет: ");
+	printf("Р’РІРµРґРёС‚Рµ СЃРѕРєРµС‚: ");
 	gets_s(socket, LEN);
-	printf("Введите чипсет: ");
+	printf("Р’РІРµРґРёС‚Рµ С‡РёРїСЃРµС‚: ");
 	gets_s(chipset, LEN);
 	return CreateMotherboard(name, socket, chipset);
 }
 
 Display InputDisplay() {
-	printf("\tВвод параметров экрана\n");
+	printf("\tР’РІРѕРґ РїР°СЂР°РјРµС‚СЂРѕРІ СЌРєСЂР°РЅР°\n");
 
 	int width, height, refreshRate;
 
-	printf("Введите ширину и высоту экрана (в пикселях): ");
+	printf("Р’РІРµРґРёС‚Рµ С€РёСЂРёРЅСѓ Рё РІС‹СЃРѕС‚Сѓ СЌРєСЂР°РЅР° (РІ РїРёРєСЃРµР»СЏС…): ");
 	scanf("%d %d", &width, &height);
-	printf("Введите частоту обновления экрана (в Гц): ");
+	printf("Р’РІРµРґРёС‚Рµ С‡Р°СЃС‚РѕС‚Сѓ РѕР±РЅРѕРІР»РµРЅРёСЏ СЌРєСЂР°РЅР° (РІ Р“С†): ");
 	scanf("%d", &refreshRate);
 	return CreateDisplay(width, height, refreshRate);
 }
 
 Laptop InputLaptop() {
-	printf("\tВвод параметров ноутбука\n");
+	printf("\tР’РІРѕРґ РїР°СЂР°РјРµС‚СЂРѕРІ РЅРѕСѓС‚Р±СѓРєР°\n");
 
 	char* name = (char*)calloc(LEN, sizeof(char));
-	printf("Введите название ноутбука: ");
+	printf("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РЅРѕСѓС‚Р±СѓРєР°: ");
 	gets_s(name, LEN);
 	return CreateLaptop(InputCPU(), InputGPU(), InputRAM(), InputMotherboard(), InputDisplay(), name);
 }
 
 Order InputOrder() {
-	printf("\tВвод данных заказа\n");
+	printf("\tР’РІРѕРґ РґР°РЅРЅС‹С… Р·Р°РєР°Р·Р°\n");
 
 	int num;
-	printf("Введите номер заказа: ");
+	printf("Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ Р·Р°РєР°Р·Р°: ");
 	scanf("%d", &num);
 	StatusTypes status;
-	printf("Введите статус заказа (0 - в ожидании, 1 - в ремонте, 2 - отремонтирован): ");
+	printf("Р’РІРµРґРёС‚Рµ СЃС‚Р°С‚СѓСЃ Р·Р°РєР°Р·Р° (0 - РІ РѕР¶РёРґР°РЅРёРё, 1 - РІ СЂРµРјРѕРЅС‚Рµ, 2 - РѕС‚СЂРµРјРѕРЅС‚РёСЂРѕРІР°РЅ): ");
 	scanf("%d", &status);
 	return CreateOrder(num, InputLaptop(), status);
 }
 
-//функции по выводу структур
+//С„СѓРЅРєС†РёРё РїРѕ РІС‹РІРѕРґСѓ СЃС‚СЂСѓРєС‚СѓСЂ
 
 void PrintLaptopInfo(Laptop laptop) {
-	printf("\tИнформация о ноутбуке\n");
-	printf("Название модели: %s\n", laptop.name);
-	printf("CPU: %s, %.1f ГГц, %d-ядерный\n", laptop.cpu.name, laptop.cpu.frequency, laptop.cpu.numOfCores);
-	printf("GPU: %s, %.1f ГГц, %d ГБ\n", laptop.gpu.name, laptop.gpu.frequency, laptop.gpu.vram);
-	printf("GPU: %s, %.1f ГГц, %d ГБ\n", laptop.gpu.name, laptop.gpu.frequency, laptop.gpu.vram);
-	printf("RAM: %s, %s, %d ГБ, %.1f МГц\n", laptop.ram.name, RAMTypeToString(laptop.ram.type), laptop.ram.capacity, laptop.ram.frequency);
-	printf("Материнская плата: %s, %s, %s\n", laptop.motherboard.name, laptop.motherboard.socket, laptop.motherboard.chipset);
-	printf("Экран: %dx%d, %d Гц\n", laptop.display.width, laptop.display.height, laptop.display.refreshRate);
+	printf("\tРРЅС„РѕСЂРјР°С†РёСЏ Рѕ РЅРѕСѓС‚Р±СѓРєРµ\n");
+	printf("РќР°Р·РІР°РЅРёРµ РјРѕРґРµР»Рё: %s\n", laptop.name);
+	printf("CPU: %s, %.1f Р“Р“С†, %d-СЏРґРµСЂРЅС‹Р№\n", laptop.cpu.name, laptop.cpu.frequency, laptop.cpu.numOfCores);
+	printf("GPU: %s, %.1f Р“Р“С†, %d Р“Р‘\n", laptop.gpu.name, laptop.gpu.frequency, laptop.gpu.vram);
+	printf("GPU: %s, %.1f Р“Р“С†, %d Р“Р‘\n", laptop.gpu.name, laptop.gpu.frequency, laptop.gpu.vram);
+	printf("RAM: %s, %s, %d Р“Р‘, %.1f РњР“С†\n", laptop.ram.name, RAMTypeToString(laptop.ram.type), laptop.ram.capacity, laptop.ram.frequency);
+	printf("РњР°С‚РµСЂРёРЅСЃРєР°СЏ РїР»Р°С‚Р°: %s, %s, %s\n", laptop.motherboard.name, laptop.motherboard.socket, laptop.motherboard.chipset);
+	printf("Р­РєСЂР°РЅ: %dx%d, %d Р“С†\n", laptop.display.width, laptop.display.height, laptop.display.refreshRate);
 }
 
 void PrintOrderInfo(Order order) {
-	printf("\tИнформация о заказе\n");
+	printf("\tРРЅС„РѕСЂРјР°С†РёСЏ Рѕ Р·Р°РєР°Р·Рµ\n");
 	printf("%d.\t%s\t%s\n", order.num, order.laptop.name, StatusTypeToString(order.status));
 }
 
-//дополнительные прикладные функции
+//РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РїСЂРёРєР»Р°РґРЅС‹Рµ С„СѓРЅРєС†РёРё
 
-//разгон процессора
+//СЂР°Р·РіРѕРЅ РїСЂРѕС†РµСЃСЃРѕСЂР°
 Laptop BoostCPU(Laptop laptop) {
 	if (laptop.cpu.frequency + 0.2 <= MAXCPUFREQ) laptop.cpu.frequency += 0.2;
 	else if (laptop.cpu.frequency < MAXCPUFREQ) laptop.cpu.frequency = MAXCPUFREQ;
-	else printf("Разгон CPU больше невозможен!\n");
+	else printf("Р Р°Р·РіРѕРЅ CPU Р±РѕР»СЊС€Рµ РЅРµРІРѕР·РјРѕР¶РµРЅ!\n");
 	return laptop;
 }
 
-//массив максимальных значений частоты для ram
+//РјР°СЃСЃРёРІ РјР°РєСЃРёРјР°Р»СЊРЅС‹С… Р·РЅР°С‡РµРЅРёР№ С‡Р°СЃС‚РѕС‚С‹ РґР»СЏ ram
 static int DDRFreqMax[]{ 400, 1066, 2400, 3333, 6400 };
 
-//разгон оперативной памяти
+//СЂР°Р·РіРѕРЅ РѕРїРµСЂР°С‚РёРІРЅРѕР№ РїР°РјСЏС‚Рё
 Laptop BoostRAM(Laptop laptop) {
 	if (laptop.ram.frequency + 50 <= DDRFreqMax[laptop.ram.type]) laptop.ram.frequency += 50;
 	else if (laptop.ram.frequency < DDRFreqMax[laptop.ram.type]) laptop.ram.frequency = DDRFreqMax[laptop.ram.type];
-	else printf("Разгон RAM больше невозможен!\n");
+	else printf("Р Р°Р·РіРѕРЅ RAM Р±РѕР»СЊС€Рµ РЅРµРІРѕР·РјРѕР¶РµРЅ!\n");
 	return laptop;
 }
 
-//изменение статуса заказа
+//РёР·РјРµРЅРµРЅРёРµ СЃС‚Р°С‚СѓСЃР° Р·Р°РєР°Р·Р°
 Order ChangeType(Order order, StatusTypes newType) {
 	if (newType >= ONHOLD && newType <= FINISHED) {
 		order.status = newType;
-		printf("Состояние заказа успешно изменено!\n");
+		printf("РЎРѕСЃС‚РѕСЏРЅРёРµ Р·Р°РєР°Р·Р° СѓСЃРїРµС€РЅРѕ РёР·РјРµРЅРµРЅРѕ!\n");
 		return order;
 	}
 	else {
-		printf("Неправильный формат данных! Выход из программы...");
+		printf("РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…! Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹...");
 		exit(EXIT_SUCCESS);
 	}
 }
