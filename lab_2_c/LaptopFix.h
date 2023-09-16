@@ -120,9 +120,13 @@ char* StatusTypeToString(StatusTypes status) {
 //основные функции
 
 //функции по инициализация всех структур
-CPU CreateCPU(char *name, float frequency, int numOfCores) {
+CPU *CreateCPU(char *name, float frequency, int numOfCores) {
 	if (strlen(name) != 0 && frequency > 0 && numOfCores > 0) {
-		CPU cpu{ name, frequency, numOfCores };
+		CPU* cpu = (CPU*)calloc(1, sizeof(CPU));
+		cpu->name = (char*)calloc(LEN, sizeof(char));
+		strcpy(cpu->name, name);
+		cpu->frequency = frequency;
+		cpu->numOfCores = numOfCores;
 		return cpu;
 	} 
 	else {
@@ -131,9 +135,13 @@ CPU CreateCPU(char *name, float frequency, int numOfCores) {
 	}
 }
 
-GPU CreateGPU(char* name, float frequency, int vram) {
+GPU *CreateGPU(char* name, float frequency, int vram) {
 	if (strlen(name) != 0 && frequency > 0 && vram > 0) {
-		GPU gpu{ name, frequency, vram };
+		GPU *gpu = (GPU*)calloc(1, sizeof(GPU));
+		gpu->name = (char*)calloc(LEN, sizeof(char));
+		strcpy(gpu->name, name);
+		gpu->frequency = frequency;
+		gpu->vram = vram;
 		return gpu;
 	} 
 	else {
@@ -142,9 +150,14 @@ GPU CreateGPU(char* name, float frequency, int vram) {
 	}
 }
 
-RAM CreateRAM(char* name, RAMTypes type, float frequency, int capacity) {
+RAM *CreateRAM(char* name, RAMTypes type, float frequency, int capacity) {
 	if (strlen(name) != 0 && frequency > 0 && capacity > 0 && type >= DDR && type <= DDR5) {
-		RAM ram{ name, type, frequency, capacity };
+		RAM* ram = (RAM*)calloc(1, sizeof(RAM));
+		ram->name = (char*)calloc(LEN, sizeof(char));
+		strcpy(ram->name, name);
+		ram->capacity = capacity;
+		ram->frequency = frequency;
+		ram->type = type;
 		return ram;
 	} 
 	else {
@@ -153,9 +166,15 @@ RAM CreateRAM(char* name, RAMTypes type, float frequency, int capacity) {
 	}
 }
 
-Motherboard CreateMotherboard(char* name, char *socket, char *chipset) {
+Motherboard *CreateMotherboard(char* name, char *socket, char *chipset) {
 	if (strlen(name) != 0 && strlen(socket) != 0 && strlen(chipset) != 0) {
-		Motherboard motherboard{ name, socket, chipset };
+		Motherboard* motherboard = (Motherboard*)calloc(1, sizeof(Motherboard));
+		motherboard->name = (char*)calloc(LEN, sizeof(char));
+		motherboard->socket = (char*)calloc(LEN, sizeof(char));
+		motherboard->chipset = (char*)calloc(LEN, sizeof(char));
+		strcpy(motherboard->name, name);
+		strcpy(motherboard->socket, socket);
+		strcpy(motherboard->chipset, chipset);
 		return motherboard;
 	} 
 	else {
@@ -164,9 +183,12 @@ Motherboard CreateMotherboard(char* name, char *socket, char *chipset) {
 	}
 }
 
-Display CreateDisplay(int width, int height, int refreshRate) {
+Display *CreateDisplay(int width, int height, int refreshRate) {
 	if (width > 0 && height > 0 && refreshRate > 0) {
-		Display display{ width, height, refreshRate };
+		Display* display = (Display*)calloc(1, sizeof(Display));
+		display->width = width;
+		display->height = height;
+		display->refreshRate = refreshRate;
 		return display;
 	}
 	else {
@@ -175,9 +197,16 @@ Display CreateDisplay(int width, int height, int refreshRate) {
 	}
 }
 
-Laptop CreateLaptop(CPU cpu, GPU gpu, RAM ram, Motherboard motherboard, Display display, char* name) {
+Laptop *CreateLaptop(CPU cpu, GPU gpu, RAM ram, Motherboard motherboard, Display display, char* name) {
 	if (strlen(name) != 0) {
-		Laptop laptop{ cpu, gpu, ram, motherboard, display, name };
+		Laptop *laptop = (Laptop*)calloc(1, sizeof(Laptop));
+		laptop->name = (char*)calloc(LEN, sizeof(char));
+		strcpy(laptop->name, name);
+		laptop->cpu = cpu;
+		laptop->gpu = gpu;
+		laptop->ram = ram;
+		laptop->motherboard = motherboard;
+		laptop->display = display;
 		return laptop;
 	}
 	else {
@@ -186,9 +215,12 @@ Laptop CreateLaptop(CPU cpu, GPU gpu, RAM ram, Motherboard motherboard, Display 
 	}
 }
 
-Order CreateOrder(int num, Laptop laptop, StatusTypes status) {
+Order *CreateOrder(int num, Laptop laptop, StatusTypes status) {
 	if (num > 0 && status >= ONHOLD && status <= FINISHED) {
-		Order order{ num, laptop, status };
+		Order* order = (Order*)calloc(1, sizeof(Order));
+		order->num = num;
+		order->laptop = laptop;
+		order->status = status;
 		return order;
 	}
 	else {
@@ -198,7 +230,7 @@ Order CreateOrder(int num, Laptop laptop, StatusTypes status) {
 }
 
 //функции по вводу структур
-CPU InputCPU() {
+CPU *InputCPU() {
 	printf("\tВвод параметров процессора\n");
 
 	char* name = (char*)calloc(LEN, sizeof(char)); 
@@ -211,10 +243,11 @@ CPU InputCPU() {
 	scanf("%f", &frequency);
 	printf("Введите количество ядер: ");
 	scanf("%d", &numOfCores);
+	while (getchar() != '\n');
 	return CreateCPU(name, frequency, numOfCores);
 }
 
-GPU InputGPU() {
+GPU *InputGPU() {
 	printf("\tВвод параметров видеокарты\n");
 
 	char* name = (char*)calloc(LEN, sizeof(char));
@@ -227,10 +260,11 @@ GPU InputGPU() {
 	scanf("%f", &frequency);
 	printf("Введите объем видеопамяти (в ГБ): ");
 	scanf("%d", &vram);
+	while (getchar() != '\n');
 	return CreateGPU(name, frequency, vram);
 }
 
-RAM InputRAM() {
+RAM *InputRAM() {
 	printf("\tВвод параметров RAM\n");
 
 	char* name = (char*)calloc(LEN, sizeof(char));
@@ -240,16 +274,17 @@ RAM InputRAM() {
 
 	printf("Введите название RAM: ");
 	gets_s(name, LEN);
-	printf("Введите тип памяти (DDR - 0, DDR2 - 1, DDR3 - 2, DDR4 - 3, DDR - 4): ");
+	printf("Введите тип памяти (DDR - 0, DDR2 - 1, DDR3 - 2, DDR4 - 3, DDR5 - 4): ");
 	scanf("%d", &type);
 	printf("Введите тактовую частоту (в МГц): ");
 	scanf("%f", &frequency);
-	printf("Введите объем: ");
+	printf("Введите объем (в ГБ): ");
 	scanf("%d", &capacity);
+	while (getchar() != '\n');
 	return CreateRAM(name, type, frequency, capacity);
 }
 
-Motherboard InputMotherboard() {
+Motherboard *InputMotherboard() {
 	printf("\tВвод параметров материнской платы\n");
 
 	char *name = (char*)calloc(LEN, sizeof(char)), 
@@ -265,7 +300,7 @@ Motherboard InputMotherboard() {
 	return CreateMotherboard(name, socket, chipset);
 }
 
-Display InputDisplay() {
+Display *InputDisplay() {
 	printf("\tВвод параметров экрана\n");
 
 	int width, height, refreshRate;
@@ -274,19 +309,20 @@ Display InputDisplay() {
 	scanf("%d %d", &width, &height);
 	printf("Введите частоту обновления экрана (в Гц): ");
 	scanf("%d", &refreshRate);
+	while (getchar() != '\n');
 	return CreateDisplay(width, height, refreshRate);
 }
 
-Laptop InputLaptop() {
+Laptop *InputLaptop() {
 	printf("\tВвод параметров ноутбука\n");
 
 	char* name = (char*)calloc(LEN, sizeof(char));
 	printf("Введите название ноутбука: ");
 	gets_s(name, LEN);
-	return CreateLaptop(InputCPU(), InputGPU(), InputRAM(), InputMotherboard(), InputDisplay(), name);
+	return CreateLaptop(*InputCPU(), *InputGPU(), *InputRAM(), *InputMotherboard(), *InputDisplay(), name);
 }
 
-Order InputOrder() {
+Order *InputOrder() {
 	printf("\tВвод данных заказа\n");
 
 	int num;
@@ -295,7 +331,8 @@ Order InputOrder() {
 	StatusTypes status;
 	printf("Введите статус заказа (0 - в ожидании, 1 - в ремонте, 2 - отремонтирован): ");
 	scanf("%d", &status);
-	return CreateOrder(num, InputLaptop(), status);
+	while (getchar() != '\n');
+	return CreateOrder(num, *InputLaptop(), status);
 }
 
 //функции по выводу структур
@@ -304,45 +341,41 @@ void PrintLaptopInfo(Laptop laptop) {
 	printf("\tИнформация о ноутбуке\n");
 	printf("Название модели: %s\n", laptop.name);
 	printf("CPU: %s, %.1f ГГц, %d-ядерный\n", laptop.cpu.name, laptop.cpu.frequency, laptop.cpu.numOfCores);
-	printf("GPU: %s, %.1f ГГц, %d ГБ\n", laptop.gpu.name, laptop.gpu.frequency, laptop.gpu.vram);
-	printf("GPU: %s, %.1f ГГц, %d ГБ\n", laptop.gpu.name, laptop.gpu.frequency, laptop.gpu.vram);
+	printf("GPU: %s, %.1f МГц, %d ГБ\n", laptop.gpu.name, laptop.gpu.frequency, laptop.gpu.vram);
 	printf("RAM: %s, %s, %d ГБ, %.1f МГц\n", laptop.ram.name, RAMTypeToString(laptop.ram.type), laptop.ram.capacity, laptop.ram.frequency);
 	printf("Материнская плата: %s, %s, %s\n", laptop.motherboard.name, laptop.motherboard.socket, laptop.motherboard.chipset);
-	printf("Экран: %dx%d, %d Гц\n", laptop.display.width, laptop.display.height, laptop.display.refreshRate);
+	printf("Экран: %dx%d, %d Гц\n\n", laptop.display.width, laptop.display.height, laptop.display.refreshRate);
 }
 
 void PrintOrderInfo(Order order) {
 	printf("\tИнформация о заказе\n");
-	printf("%d.\t%s\t%s\n", order.num, order.laptop.name, StatusTypeToString(order.status));
+	printf("%d. %s\t%s\n\n", order.num, order.laptop.name, StatusTypeToString(order.status));
 }
 
 //дополнительные прикладные функции
 
 //разгон процессора
-Laptop BoostCPU(Laptop laptop) {
-	if (laptop.cpu.frequency + 0.2 <= MAXCPUFREQ) laptop.cpu.frequency += 0.2;
-	else if (laptop.cpu.frequency < MAXCPUFREQ) laptop.cpu.frequency = MAXCPUFREQ;
+void BoostCPU(Laptop *laptop) {
+	if (laptop->cpu.frequency + 0.2 <= MAXCPUFREQ) laptop->cpu.frequency += 0.2;
+	else if (laptop->cpu.frequency < MAXCPUFREQ) laptop->cpu.frequency = MAXCPUFREQ;
 	else printf("Разгон CPU больше невозможен!\n");
-	return laptop;
 }
 
 //массив максимальных значений частоты для ram
 static int DDRFreqMax[]{ 400, 1066, 2400, 3333, 6400 };
 
 //разгон оперативной памяти
-Laptop BoostRAM(Laptop laptop) {
-	if (laptop.ram.frequency + 50 <= DDRFreqMax[laptop.ram.type]) laptop.ram.frequency += 50;
-	else if (laptop.ram.frequency < DDRFreqMax[laptop.ram.type]) laptop.ram.frequency = DDRFreqMax[laptop.ram.type];
+void BoostRAM(Laptop *laptop) {
+	if (laptop->ram.frequency + 50 <= DDRFreqMax[laptop->ram.type]) laptop->ram.frequency += 50;
+	else if (laptop->ram.frequency < DDRFreqMax[laptop->ram.type]) laptop->ram.frequency = DDRFreqMax[laptop->ram.type];
 	else printf("Разгон RAM больше невозможен!\n");
-	return laptop;
 }
 
 //изменение статуса заказа
-Order ChangeType(Order order, StatusTypes newType) {
+void ChangeType(Order *order, StatusTypes newType) {
 	if (newType >= ONHOLD && newType <= FINISHED) {
-		order.status = newType;
+		order->status = newType;
 		printf("Состояние заказа успешно изменено!\n");
-		return order;
 	}
 	else {
 		printf("Неправильный формат данных! Выход из программы...");
