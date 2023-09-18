@@ -382,3 +382,14 @@ void ChangeType(Order *order, StatusTypes newType) {
 		exit(EXIT_SUCCESS);
 	}
 }
+
+//освобождение памяти для объектов внутри laptop
+void FreeLaptopMemory(Laptop *laptop) {
+	free(laptop->name);
+	free(laptop->cpu.name);
+	free(laptop->gpu.name);
+	free(laptop->ram.name);
+	free(laptop->motherboard.name);
+	free(laptop->motherboard.socket);
+	free(laptop->motherboard.chipset);
+}

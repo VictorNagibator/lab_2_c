@@ -25,4 +25,6 @@ int main()
     ChangeType(dynamicExample, FINISHED);
     PrintOrderInfo(*dynamicExample);
     PrintLaptopInfo(dynamicExample->laptop);
+    FreeLaptopMemory(&dynamicExample->laptop);
+    free(dynamicExample);
 }
